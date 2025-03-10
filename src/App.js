@@ -34,7 +34,12 @@ export default function App() {
 }
 
 function Logo() {
-  return <h1>🌴Far Away 👜</h1>;
+  return (
+    <header>
+      <h1>FarAway</h1>
+      <p>A simple necessity application for your travel</p>
+    </header>
+  );
 }
 
 function Form({ onAddItems }) {
@@ -56,7 +61,7 @@ function Form({ onAddItems }) {
 
   return (
     <form className="add-form" onSubmit={handleSubmit}>
-      <h3>What do you need for your trip? 🥰</h3>
+      {/* <h3>What do you need for your trip?</h3> */}
       <select
         value={quantity}
         onChange={(e) => setQuantity(Number(e.target.value))}
@@ -73,7 +78,7 @@ function Form({ onAddItems }) {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       ></input>
-      <button>Add</button>
+      <button>Add Item</button>
     </form>
   );
 }
@@ -95,6 +100,16 @@ function PackingList({ items, onDeleteItem, onToggleItem }) {
     sortedItems = items
       .slice()
       .sort((a, b) => Number(a.packed) - Number(b.packed));
+
+  if (!items.length)
+    return (
+      <div className="list">
+        <p className="list-message">
+          Start adding some items to your packing list
+        </p>
+      </div>
+    );
+
   return (
     <div className="list">
       <ul>
@@ -130,7 +145,7 @@ function Item({ item, onDeleteItem, onToggleItem }) {
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         {item.quantity} {item.description}
       </span>
-      <button onClick={() => onDeleteItem(item.id)}>❌</button>
+      <button onClick={() => onDeleteItem(item.id)}>&times;</button>
     </li>
   );
 }
@@ -139,7 +154,8 @@ function Stats({ items }) {
   if (!items.length)
     return (
       <p className="stats">
-        <em>Start adding some items to your packing list 🚀</em>
+        {" "}
+        &copy; Jonas Schmedtmann's course work. Redesigned by ZAHN.
       </p>
     );
   const numItems = items.length;
@@ -147,12 +163,10 @@ function Stats({ items }) {
   const percentage = Math.round((numPacked / numItems) * 100);
   return (
     <footer className="stats">
-      <em>
-        {" "}
-        {percentage === 100
-          ? "You got everything! Ready to go ✈️"
-          : ` 👜You have ${numItems} items on your list, and you already packed ${numPacked} (${percentage}%)`}
-      </em>
+      {" "}
+      {percentage === 100
+        ? "You got everything! Ready to go ✈️"
+        : ` You have ${numItems} items on your list, and you already packed ${numPacked} (${percentage}%)`}
     </footer>
   );
 }

@@ -17,7 +17,7 @@ This is a simple project from Jonas Schmedtmann's React.js course. In this proje
 
 ## Installation
 ```bash
-git clone https://github.com/zahnx/repo-name.git
-cd repo-name
+git clone https://github.com/zahnx/travel-list.git
+cd travel-list
 npm install
 npm start
